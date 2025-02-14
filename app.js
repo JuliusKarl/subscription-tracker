@@ -1,6 +1,6 @@
 import express, { urlencoded } from 'express';
 
-import { PORT } from './config/env.js'; 
+import { PORT } from './config/env.js';
 
 import userRouter from './routes/user.routes.js'
 import authRouter from './routes/auth.routes.js'
@@ -13,19 +13,18 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
-app.use(errorMiddleware);
-app.use(urlencoded({extended: false}));
+app.use(urlencoded({ extended: false }));
 app.use(cookieParser())
 
 // Routes
 app.get('/', (req, res) => {
-    res.send({body: 'Welcome to the subscription tracker API!'});
+    res.send({ body: 'Welcome to the subscription tracker API!' });
 })
 app.use('/api/v1/auth', authRouter);
 app.use('/users', userRouter);
 app.use('/subscriptions', subscriptionRouter);
 
-
+app.use(errorMiddleware);
 
 app.listen(PORT, async () => {
     console.log(`Subscription tracker API is running on http://localhost:${PORT}`);

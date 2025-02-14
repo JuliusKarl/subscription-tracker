@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const subscriptionSchema = new mongoose.Schema({definition: {
+const subscriptionSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Subscription name is required.'],
@@ -63,7 +63,7 @@ const subscriptionSchema = new mongoose.Schema({definition: {
         required: true,
         index: true,
     },
-}, options: { timestamps: true }});
+}, { timestamps: true });
 
 // Auto-calculate renewal date if missing.
 subscriptionSchema.pre('save', function (next) {
@@ -85,6 +85,6 @@ subscriptionSchema.pre('save', function (next) {
     }
 });
 
-const subscription = mongoose.model({name: 'Subscription', subscriptionSchema});
+const Subscription = mongoose.model('Subscription', subscriptionSchema);
 
-export default subscription;
+export default Subscription;
